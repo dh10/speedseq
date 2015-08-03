@@ -208,7 +208,7 @@ global options:
 		exit 1
 		;;
 	    R)
-		RG="$OPTARG"
+	 g	RG="$OPTARG"
 		RG_FMT="-R '$OPTARG'"
 		;;
 	    p)
@@ -564,12 +564,14 @@ options:
     then
 	var_usage
         echo -e "Error: VEP not found. Please set path in $SPEEDSEQ_DIR/speedseq.config file\n"
-        exit 1
+        echo -e "Warning: Annotation will not be performed.\n"
+        ANNOTATE=0
     elif [[ ! -d "$VEP_CACHE_DIR" ]] && [[ "$ANNOTATE" -eq 1 ]]
     then
 	var_usage
         echo -e "Error: VEP cache directory not found. Please set path in $SPEEDSEQ_DIR/speedseq.config file\n"
-        exit 1
+        echo -e "Warning: Annotation will not be performed.\n"
+        ANNOTATE=0
     elif [[ ! -f "$PARALLEL" ]]
     then
 	var_usage
@@ -693,14 +695,12 @@ options:
                 --cache \\
                 --dir_cache $VEP_CACHE_DIR \\
                 --species homo_sapiens \\
-                --sift b \\
-                --polyphen b \\
                 --symbol \\
+                --Carol \\
                 --numbers \\
-                --biotype \\
                 --total_length \\
                 --vcf \\
-                --fields Consequence,Codons,Amino_acids,Gene,SYMBOL,Feature,EXON,PolyPhen,SIFT,Protein_position,BIOTYPE \\
+                --fields Consequence,Codons,Amino_acids,Gene,SYMBOL,Feature,EXON,CAROL,Protein_position \\
                 | $BGZIP -c > $OUTPUT.vcf.gz"
 	fi
 
