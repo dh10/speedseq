@@ -1049,14 +1049,12 @@ options:
                 --cache \\
                 --dir_cache $VEP_CACHE_DIR \\
                 --species homo_sapiens \\
-                --sift b \\
-                --polyphen b \\
+                --Carol \\
                 --symbol \\
                 --numbers \\
-                --biotype \\
                 --total_length \\
                 --vcf \\
-                --fields Consequence,Codons,Amino_acids,Gene,SYMBOL,Feature,EXON,PolyPhen,SIFT,Protein_position,BIOTYPE \\
+                --fields Consequence,Codons,Amino_acids,Gene,SYMBOL,Feature,EXON,CAROL,Protein_position \\
                 | $BGZIP -c > $OUTPUT.vcf.gz"
 	fi    
 	for i in `cat $WINDOWS | awk '{print $1":"$2".."$3}'`
